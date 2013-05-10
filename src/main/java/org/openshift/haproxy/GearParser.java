@@ -17,6 +17,7 @@ public class GearParser {
 				String[] splitLines = line.split(",");
 				Gear currentGear = new Gear(splitLines[1], splitLines[0], new Integer(splitLines[9]), new Integer(splitLines[7]));
 				gears.add(currentGear);
+				System.out.println("Added new gear");
 			}
 		} catch (Exception e){
 			e.printStackTrace();
