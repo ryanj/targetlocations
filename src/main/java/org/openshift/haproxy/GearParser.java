@@ -7,9 +7,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class GearParser {
+	ArrayList<Gear> gears = new ArrayList<Gear>(50);
 	public GearParser(String urlToParse) {
 		try {
-			ArrayList<Gear> gears = new ArrayList<Gear>(20);
 			String line = null;
 			InputStream in = new URL(urlToParse).openConnection().getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -22,5 +22,9 @@ public class GearParser {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public ArrayList<Gear> getGears() {
+		return gears;
 	}
 }

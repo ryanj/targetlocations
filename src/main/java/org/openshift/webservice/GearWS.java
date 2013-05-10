@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.openshift.haproxy.Gear;
+import org.openshift.haproxy.GearParser;
 
 
 @RequestScoped
@@ -27,8 +28,10 @@ public class GearWS {
 	@Path("/test")
 	@Produces("text/plain")
 	public String sayHello() {
-		System.out.println("Where is this getting written");
-	    return "Hello World In Both Places";
+		ArrayList<Gear> gears = new ArrayList<Gear>();
+		GearParser gearParser = new GearParser(new String("http://" + System.getenv("OPENSHIFT_GEAR_DNS") + "/haproxy-status/;csv"));
+		gears = gearParser.getGears();
+	    return ((Gear) gears.get(0)).gearName;
 	}
 
 }
