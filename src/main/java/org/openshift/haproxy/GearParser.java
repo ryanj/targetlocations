@@ -14,6 +14,7 @@ public class GearParser {
 			InputStream in = new URL(urlToParse).openConnection().getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			while ((line = br.readLine()) != null) {
+				System.out.println("Line: " + line);
 				String[] splitLines = line.split(",");
 				Gear currentGear = new Gear(splitLines[1], splitLines[0], new Integer(splitLines[9]), new Integer(splitLines[7]));
 				gears.add(currentGear);
