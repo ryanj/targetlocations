@@ -30,6 +30,7 @@ public class GearWS {
 	public String sayHello() {
 		ArrayList<Gear> gears = new ArrayList<Gear>();
 		GearParser gearParser = new GearParser(new String("http://" + System.getenv("OPENSHIFT_GEAR_DNS") + "/haproxy-status/;csv"));
+		gears = gearParser.getGears();
 	    return ((Gear) gears.get(0)).gearName;
 	}
 
