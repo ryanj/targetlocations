@@ -26,15 +26,15 @@ public class GearWS {
 /****** Just for testing purposes ***********/	
 	@GET()
 	@Path("/test")
-	@Produces("text/plain")
-	public String sayHello() {
+	@Produces("application/json")
+	public ArrayList<Gear> sayHello() {
 		String URL = new String("http://" + System.getenv("OPENSHIFT_GEAR_DNS") + "/haproxy-status/;csv");
 		System.out.println("URL: " + URL);
 		ArrayList<Gear> gears = new ArrayList<Gear>();
 		GearParser gearParser = new GearParser(URL);
 		gears = gearParser.getGears();
 		
-	    return ((Gear) gears.get(0)).gearName;
+	    return (gears);
 	}
 
 }
