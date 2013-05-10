@@ -24,7 +24,7 @@ public class GearWS {
 	
 /****** Just for testing purposes ***********/	
 	@GET()
-	@Path("/gears/test")
+	@Path("/test")
 	@Produces("text/plain")
 	public String sayHello() {
 		System.out.println("Where is this getting written");
