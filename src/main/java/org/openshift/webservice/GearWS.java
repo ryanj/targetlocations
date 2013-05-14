@@ -1,7 +1,6 @@
 package org.openshift.webservice;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
@@ -16,12 +15,19 @@ import org.openshift.haproxy.GearParser;
 @Path("/gears")
 public class GearWS {
 	
-	//get all the parks
+	//get all the gears for an application
 	@GET()
 	@Produces("application/json")
-	public List getAllGears(){
-		return new ArrayList<Gear>();
+	public ArrayList<Gear> getAllGears(String gearDNS){
+		String URL = new String("http://" + gearDNS + "/haproxy-status/;csv");
+		ArrayList<Gear> gears = new ArrayList<Gear>();
+		GearParser gearParser = new GearParser(URL);
+		gears = gearParser.getGears();
+		
+	    return (gears);
 	}
+	
+	
 	
 /****** Just for testing purposes ***********/	
 	@GET()
