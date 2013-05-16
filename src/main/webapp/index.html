@@ -42,12 +42,12 @@
 
 
 		function onDragEnd(e){
-			$.ajax({
-				url: "ws/parks"}).done(function(response){
-					alert("You stopped dragging: " + map.getCenter());	
-			})
-			
-			
+			alert("You stopped dragging: " + map.getCenter());	
+			$.get("ws/parks", pinTheMap, "json")
+		}
+
+		function pinTheMap(data){
+			alert("Hello data " + data);
 
 		}
 
