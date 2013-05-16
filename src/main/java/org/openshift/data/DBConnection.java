@@ -27,7 +27,7 @@ public class DBConnection {
 	public void afterCreate() {
 		System.out.println("just see if we can say anything");
 		
-		String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
+		String host = System.getenv("OPENSHIFT_MONGODB_DB_GEAR_DNS");
 		
 		if (host == null || "".equals(host)){
 			//we are not on openshift
