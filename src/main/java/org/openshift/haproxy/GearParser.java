@@ -22,7 +22,7 @@ public class GearParser {
 					String[] splitLines = line.split(",");
 					Gear currentGear = new Gear(splitLines[1], splitLines[0],
 							new Integer(splitLines[9]), new Integer(
-									splitLines[4]));
+									splitLines[7]));
 					gears.add(currentGear);
 					System.out.println("Added new gear to arraylist");
 				}
