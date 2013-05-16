@@ -18,8 +18,8 @@ public class GearWS {
 	//get all the gears for an application
 	@GET()
 	@Produces("application/json")
-	public ArrayList<Gear> getAllGears(String gearDNS){
-		String URL = new String("http://" + gearDNS + "/haproxy-status/;csv");
+	public ArrayList<Gear> getAllGears(String appDNS){
+		String URL = new String("http://" + appDNS + "/haproxy-status/;csv");
 		ArrayList<Gear> gears = new ArrayList<Gear>();
 		GearParser gearParser = new GearParser(URL);
 		gears = gearParser.getGears();
@@ -34,7 +34,7 @@ public class GearWS {
 	@Path("/test")
 	@Produces("application/json")
 	public ArrayList<Gear> sayHello() {
-		String URL = new String("http://" + System.getenv("OPENSHIFT_GEAR_DNS") + "/haproxy-status/;csv");
+		String URL = new String("http://" + System.getenv("OPENSHIFT_APP_DNS") + "/haproxy-status/;csv");
 		System.out.println("URL: " + URL);
 		ArrayList<Gear> gears = new ArrayList<Gear>();
 		GearParser gearParser = new GearParser(URL);
