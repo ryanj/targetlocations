@@ -79,6 +79,57 @@ public class ParkWS {
 		return holder;
 	}
 	
+	///////////get parks within a bounding box (used for map application)
+	@GET
+	@Produces("application/json")
+	@Path("within")
+	public List findParksWithin(@QueryParam("lat1") float lat1, @QueryParam("lon1") float lon1, @QueryParam("lat2") float lat2, @QueryParam("lon2") float lon2){
+		ArrayList<Map> allParksList = new ArrayList<Map>();
+		DB db = dbConnection.getDB();
+		DBCollection parkListCollection = db.getCollection("parkpoints");
+		
+		//make the query object
+		BasicDBObject spatialQuery = new BasicDBObject();
+		ArrayList posList = new ArrayList();
+		ArrayList firstPair = new ArrayList();
+		ArrayList secondPair = new ArrayList();
+		firstPair.add(new Float(lon1));
+		firstPair.add(new Float(lat1));
+		secondPair.add(new Float(lon2));
+		secondPair.add(new Float(lat2));
+		
+		posList.add(firstPair);
+		posList.add(secondPair);
+		
+		BasicDBObject boxQuery = new BasicDBObject();
+		boxQuery.put("$box", posList);
+		
+		spatialQuery.put("pos", new BasicDBObject("$within", boxQuery));
+		
+		System.out.println("within spatial query: " + spatialQuery.toString());
+		
+		
+		DBCursor cursor = parkListCollection.find(spatialQuery);
+		try {
+			while(cursor.hasNext()) {
+				DBObject dataValue = cursor.next();
+				HashMap holder = new HashMap<String, Object>();
+				holder.put("name",dataValue.get("Name"));
+				holder.put("position", dataValue.get("pos"));
+				holder.put("id", dataValue.get("_id").toString());
+				allParksList.add(holder);
+            }
+        } finally {
+            cursor.close();
+        }
+
+
+		
+		
+		return allParksList;
+		
+	}
+	
 	
 	
 	///////////get parks near a coord  ?lat=37.5&lon=-83.0

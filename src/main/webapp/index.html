@@ -41,11 +41,11 @@
 		}).addTo(map);
 
 
-		function onDragEnd(e){
-			coords = map.getCenter();
-			url = "ws/parks/near?lat=" + coords.lat + "&lon=" + coords.lng;
-			alert("You stopped dragging: " + url);				
-			$.get(url, pinTheMap, "json")
+		function onDragEnd(e){			
+			bounds = map.getBounds();
+			url = "ws/parks/within?lat1=" + bounds._northEast.lat + "&lon1=" + bounds._northEast.lng + "&lat2=" + bounds._southWest.lat + "&lon2=" + bounds._southWest.lng;
+			alert("You stopped dragging: " + map.getBounds);				
+			//$.get(url, pinTheMap, "json")
 		}
 
 		function pinTheMap(data){
