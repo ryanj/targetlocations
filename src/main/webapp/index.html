@@ -42,8 +42,10 @@
 
 
 		function onDragEnd(e){
-			alert("You stopped dragging: " + map.getCenter());	
-			$.get("ws/parks", pinTheMap, "json")
+			coords = map.getCenter();
+			url = "ws/parks/near?lat=" + coords.lat + "&lon=" + coords.lng;
+			alert("You stopped dragging: " + url);				
+			$.get(url, pinTheMap, "json")
 		}
 
 		function pinTheMap(data){
