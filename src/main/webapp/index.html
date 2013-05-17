@@ -40,13 +40,12 @@
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 		}).addTo(map);
+
 		
 
-
-		function onDragEnd(e){			
+		function getPins(e){			
 			bounds = map.getBounds();
 			url = "ws/parks/within?lat1=" + bounds.getNorthEast().lat + "&lon1=" + bounds.getNorthEast().lng + "&lat2=" + bounds.getSouthWest().lat + "&lon2=" + bounds.getSouthWest().lng;
-			//alert("You stopped dragging: " + url);				
 			$.get(url, pinTheMap, "json")
 		}
 
@@ -66,7 +65,10 @@
 
 		}
 
-		map.on('dragend', onDragEnd);
+		map.on('dragend', getPins);
+		map.on('load', getPins);
+		map.on('zoomend', getPins);
+		
 	</script>
 </body>
 </html>
