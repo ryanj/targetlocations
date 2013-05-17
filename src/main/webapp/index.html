@@ -56,9 +56,11 @@
 			
 			//add the new pins
 			var markerArray = new Array(data.length)
-			for (park in data){
-				markerArray.push(L.marker([park.position[1], park.position[0]]).bindPopup(park.name));
+			for (var i = 0; i < data.length; i++){
+				park = data[i];
+				markerArray.push(L.marker([park.position[1], park.position[0]]).bindPopup(park.name));			
 			}
+			
 			markerLayerGroup = L.layerGroup(markerArray).addTo(map);	
 
 			alert("Let's see ");
