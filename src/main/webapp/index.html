@@ -65,9 +65,9 @@
 
 		}
 
-		map.on('dragend', getPins);
-		map.on('load', getPins);
+		map.on('dragend', getPins);	
 		map.on('zoomend', getPins);
+		map.whenReady(getPins)
 		
 	</script>
 </body>
