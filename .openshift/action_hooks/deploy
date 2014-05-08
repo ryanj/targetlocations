@@ -3,3 +3,12 @@
 # build hook has been run but before the application has been started back
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
+
+# cleanup and reset:
+mongo $OPENSHIFT_APP_NAME --host $OPENSHIFT_MONGODB_DB_HOST --username $OPENSHIFT_MONGODB_DB_USERNAME --password $OPENSHIFT_MONGODB_DB_PASSWORD --eval "db.parks.drop()"
+
+#import our data:
+mongoimport --db $OPENSHIFT_APP_NAME --collection parks --host $OPENSHIFT_MONGODB_DB_HOST --username $OPENSHIFT_MONGODB_DB_USERNAME --password $OPENSHIFT_MONGODB_DB_PASSWORD --port $OPENSHIFT_MONGODB_DB_PORT --type json --file $OPENSHIFT_REPO_DIR/parkcoord.json
+
+#Add our 2d index:
+mongo $OPENSHIFT_APP_NAME --host $OPENSHIFT_MONGODB_DB_HOST --username $OPENSHIFT_MONGODB_DB_USERNAME --password $OPENSHIFT_MONGODB_DB_PASSWORD --eval "db.parks.ensureIndex({'pos':'2d'})"

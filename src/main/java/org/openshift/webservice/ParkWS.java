@@ -41,7 +41,7 @@ public class ParkWS {
 	public List getAllParks(){
 		ArrayList allParksList = new ArrayList();
 		DB db = dbConnection.getDB();
-		DBCollection parkListCollection = db.getCollection("parkpoints");
+		DBCollection parkListCollection = db.getCollection("parks");
 		DBCursor cursor = parkListCollection.find();
 		try {
 			while(cursor.hasNext()) {
@@ -69,7 +69,7 @@ public class ParkWS {
 	public HashMap getAPark(@PathParam("id") String id){
 		
 		DB db = dbConnection.getDB();
-		DBCollection parkListCollection = db.getCollection("parkpoints");
+		DBCollection parkListCollection = db.getCollection("parks");
 		
 		DBObject park = parkListCollection.findOne(new BasicDBObject().append("_id",  new ObjectId(id)));
 		HashMap holder = new HashMap<String, Object>();
@@ -86,7 +86,7 @@ public class ParkWS {
 	public List findParksWithin(@QueryParam("lat1") float lat1, @QueryParam("lon1") float lon1, @QueryParam("lat2") float lat2, @QueryParam("lon2") float lon2){
 		ArrayList<Map> allParksList = new ArrayList<Map>();
 		DB db = dbConnection.getDB();
-		DBCollection parkListCollection = db.getCollection("parkpoints");
+		DBCollection parkListCollection = db.getCollection("parks");
 		
 		//make the query object
 		BasicDBObject spatialQuery = new BasicDBObject();
@@ -139,7 +139,7 @@ public class ParkWS {
 	public List findParksNear(@QueryParam("lat") float lat, @QueryParam("lon") float lon){
 		ArrayList<Map> allParksList = new ArrayList<Map>();
 		DB db = dbConnection.getDB();
-		DBCollection parkListCollection = db.getCollection("parkpoints");
+		DBCollection parkListCollection = db.getCollection("parks");
 		
 		//make the query object
 		BasicDBObject spatialQuery = new BasicDBObject();
@@ -177,7 +177,7 @@ public class ParkWS {
 	public List findParksNearName(@PathParam("name") String name, @QueryParam("lat") float lat, @QueryParam("lon") float lon){
 		ArrayList<Map> allParksList = new ArrayList<Map>();
 		DB db = dbConnection.getDB();
-		DBCollection parkListCollection = db.getCollection("parkpoints");
+		DBCollection parkListCollection = db.getCollection("parks");
 		
 		//make the query object
 		BasicDBObject wholeQuery = new BasicDBObject();
@@ -224,7 +224,7 @@ public class ParkWS {
 		parkObject.append("pos", park.getPos());
 		
 		DB db = dbConnection.getDB();
-		DBCollection parkListCollection = db.getCollection("parkpoints");
+		DBCollection parkListCollection = db.getCollection("parks");
 		try{
 			parkListCollection.insert(parkObject, WriteConcern.SAFE);
 		} catch (Exception e) {

@@ -27,7 +27,7 @@ public class DBConnection {
 	public void afterCreate() {
 		System.out.println("just see if we can say anything");
 		
-		String host = "518c27645973ca43db0002ab-sipsummit.rhcloud.com";
+		String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
 		
 		if (host == null || "".equals(host)){
 			//we are not on openshift

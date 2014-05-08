@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Map of parks</title> 
+  <title>National Parks and Historic Sites</title> 
   	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+    <link rel="stylesheet" href="css/ribbon.css" />
+
 	<!--[if lte IE 8]>
     	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
 	<![endif]-->
@@ -30,7 +32,7 @@
 	
 </head>
 <body>
-	<h1 id="title">National Park Locator</h1>
+	<h1 id="title">National Parks and Historic Sites</h1>
 	<div id="map"></div>
 	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script> 
 	<script>
@@ -70,5 +72,6 @@
 		map.whenReady(getPins)
 		
 	</script>
+  <span id="fossribbon"><a href="https://openshift.redhat.com/app/console/application_types/custom?name=parks&amp;initial_git_url=https%3A%2F%2Fgithub.com/ryanj/javaparks.git&amp;cartridges[]=jbossas&amp;cartridges[]=mongodb-2">Run me on OpenShift</a></span>
 </body>
 </html>
